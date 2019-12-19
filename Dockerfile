@@ -1,4 +1,4 @@
-FROM php:7.2 apache
+FROM php:7.2-apache
 
 
 # Note: mycrypt extension is not provided with the php source since 7.2.
@@ -10,9 +10,9 @@ FROM php:7.2 apache
 #	wordpress needs mod-rewrite enabled in apache, which is disabled in defaulat php:7 image.
 
 RUN	    apt-get update \
-	&&  apt-get install -y --no-install recommands \
+	&&  apt-get install -y --no-install-recommends \
 	     libjpeg-dev \
-	     libpng-deve \
+	     libpng-dev \
 	 &&  docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
 	 &&  docker-php-ext-install gd mysqli opcache \
 	 &&  a2enmod rewrite expires \
@@ -27,7 +27,7 @@ RUN	    apt-get update \
 	 
 	 ######################################################################################
 # Optional:
-Copy any custom apache configuraion / virtualhost configuration file at this point
+#Copy any custom apache configuraion / virtualhost configuration file at this point
 # Put your apache config files in /etc/apache2/sites-enabled/
 # Main httpd.conf file is located at: /usr/local/apache2/conf/httpd.conf
 ######################################################################################
